@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+{% block content %}
+
+<section class="calculator">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-7">
+          <div class="section-heading">
+            <h4>Order</h4>
+
+          </div>
+          <form id="calculate" action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+              {% for msg in messages %}
+            <h5 style="color:red;">{{msg}}</h5>
+              {% endfor %}
+              <div class="col-lg-12">
+                <fieldset>
+                  <label>Your Name</label>
+                  <input type="text" name="name" id="name" placeholder="" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label>Your Date of Birth</label>
+                  <input type="date" name="dob"  placeholder="" required="">
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label>Age</label>
+                  <input type="text" name="age"  placeholder="" autocomplete="on" >
+                </fieldset>
+              </div>
+              <div class="col-lg-6 ">
+                <fieldset class="checkbox-group">
+                  <label>Gender</label><br>
+                  <p style="display: inline;">
+                  <label>Male</label><input type="radio" name="gender"  value="male"  autocomplete="on" >
+                  <label>Female</label><input type="radio" name="gender"  value="female"  autocomplete="on" ></p>
+                  <label>Others</label><input type="radio" name="gender"  value="other"  autocomplete="on" ></p>
+
+                </fieldset>
+              </div>
+              <div class="col-lg-6 ">
+                <fieldset class="checkbox-group">
+                  <label>Materials provide</label><br>
+
+                  <label  style="margin-right: 5px;">Books</label><input type="checkbox" name="Materials" value="book"   autocomplete="on" >
+                  <label style="margin-right: 10px;">Pen</label><input type="checkbox" name="Materials" value="pen"  autocomplete="on" >
+                  <label style="margin-right: 20px;">Paper</label><input type="checkbox" name="Materials" value="paper"  autocomplete="on" >
+
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <label>Phone Number</label>
+                  <input type="text" name="phone" placeholder="" autocomplete="on" >
+                </fieldset>
+              </div><div class="col-lg-12">
+                <fieldset>
+                  <label>Email id</label>
+                  <input type="email" name="email"  placeholder="" autocomplete="on" >
+                </fieldset>
+              </div>
+              </div>
+            <div class="col-lg-12">
+                <fieldset>
+                  <label class="form-label">Department</label>
+                  <select name="department" id="department" class="department-dropdown" aria-label="Default select example">
+                      <option selected value=" ">Choose an Option</option>
+                    {% for departments in departments %}
+                      <option value="{{departments.id}}">{{departments.department}}</option>
+                    {% endfor %}
+                  </select>
+              </fieldset>
+              </div>
+            <div class="col-lg-12">
+                <fieldset>
+                  <label class="form-label">Course</label>
+                  <select name="course" id="course" class="course-dropdown" aria-label="Default select example" >
+
+                      {% for departments in courses %}
+                      <option value="{{courses.id}}">{{courses.course}}</option>
+                    {% endfor %}
+                  </select>
+              </fieldset>
+              </div>
+            <div class="col-lg-12">
+                <fieldset>
+                  <label class="form-label">Purpose</label>
+                  <select name="purpose"  aria-label="Default select example" >
+
+                      {% for purpose in purpose %}
+                      <option value="{{purpose.id}}">{{purpose.purpose}}</option>
+                    {% endfor %}
+                  </select>
+              </fieldset>
+              </div>
+
+            <div class="col-lg-12">
+                <fieldset>
+                  <label class="form-label">Address</label>
+
+                  <textarea id="w3review" name="address" rows="4" cols="80"></textarea>
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">Submit</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // When the department dropdown changes
+        $('.department-dropdown').change(function () {
+            var departmentId = $(this).val();
+            //alert(departmentId);
+            var courseDropdown = $(this).closest('form').find('.course-dropdown');
+
+            // Make an AJAX request to the server with the selected department id
+            $.ajax({
+                url: '/get_courses/' + departmentId + '/',
+                success: function (data) {
+                    // Clear existing options in the course dropdown
+                    courseDropdown.empty();
+
+                    // Populate the course dropdown with the fetched courses
+                    $.each(data.courses, function (index, course) {
+                        courseDropdown.append('<option value="' + course.id + '">' + course.name + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

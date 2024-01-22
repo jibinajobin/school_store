@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+{% block content %}
+<div class="swiper-container" id="top">
+    <div class="swiper-wrapper">
+  <div class="swiper-slide">
+        <div class="slide-inner" style="background-image:url(assets/images/slide-01.jpg)">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <div class="header-text">
+                 <center>
+               {% for messages in messages %}
+            <h1 style="color:#90EE90;">{{messages}}</h1>
+              {% endfor %}
+              &nbsp;&nbsp;&nbsp;&nbsp;<h6 style="color:white;">To go home <a href="{% url 'school:index' %}">click here </a></h6>
+
+            </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+
+{% endblock %}

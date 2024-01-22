@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+{% block content %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <div class="swiper-container" id="top">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="slide-inner" style="background-image:url(assets/images/slide-01.jpg)">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+
+                   <section class="calculator">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="left-image">
+            <img src="assets/images/calculator-image.png" alt="">
+          </div>
+        </div>
+
+          <form id="calculate" action="" method="post">
+              {% csrf_token %}
+            <div class="row">
+             <div class="col-lg-12">
+                <fieldset>
+
+                  <input type="subject" name="username" style="color:white;" id="subject" placeholder="User Name" autocomplete="on" >
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+
+                  <input type="password" name="password1"  placeholder="Password" autocomplete="on" >
+                </fieldset>
+              </div>
+                <div class="col-lg-12">
+                <fieldset>
+
+                  <input type="password" name="password"  placeholder="Re enter Password" autocomplete="on" >
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">REGISTER</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+          {% for msg in messages %}
+    <h5 style="color:red;">{{msg}}</h5>
+    {% endfor %}
+        </div>
+      </div>
+
+  </section>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+
+  <!-- ***** Main Banner Area End ***** -->
+ {% endblock %}

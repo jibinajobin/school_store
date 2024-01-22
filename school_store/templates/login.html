@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+{% block content %}
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <div class="swiper-container" id="top">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="slide-inner" style="background-image:url(assets/images/slide-01.jpg)">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8">
+
+                   <section class="calculator">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="left-image">
+            <img src="assets/images/calculator-image.png" alt="">
+          </div>
+        </div>
+
+          <form id="calculate" action="" method="post">
+              {% csrf_token %}
+            <div class="row">
+
+             <div class="col-lg-12">
+                <fieldset>
+                  <label for="subject">USER NAME</label>
+                  <input type="text" name="username" placeholder="" autocomplete="on" >
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="subject">PASSWORD</label>
+                  <input type="password" name="password" placeholder="" autocomplete="on" >
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">LOGIN</button>
+
+                </fieldset><br>
+                  <h6 style="color:white;">To register <a href="{% url 'school:register' %}">click</a>&nbsp;here</h6>
+
+              </div>
+            </div>
+               {% for msg in messages %}
+    <h5 style="color:red;">{{msg}}</h5>
+    {% endfor %}
+          </form>
+        </div>
+      </div>
+
+  </section>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+  </div>
+
+  <!-- ***** Main Banner Area End ***** -->
+
+{% endblock %}

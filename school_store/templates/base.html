@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>School Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-574-mexant.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+<style>
+    input {
+           color:white;
+
+        }
+    ::placeholder {
+            color: #E0E0E0;
+        }
+    .checkbox-group {
+            display:inline-block;
+
+        }
+
+
+
+</style>
+  </head>
+
+<body>
+  <header class="header-area header-sticky" style="background:#29465B;">
+      <div class="container">
+          <div class="row" >
+              <div class="col-12">
+                  <nav class="main-nav" >
+                      <!-- ***** Logo Start ***** -->
+                      <a href="#" class="logo" style="font-family:Cursive;color:#F1948A ;">
+                          <img src="assets/images/logo.png" alt="">Providence
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                          <li class="scroll-to-section"><a href="{% url 'school:index' %}" class="active">Home</a></li>
+
+
+                          <li class="has-sub">
+                              <a href="javascript:void(0)">Departments</a>
+                              <ul class="sub-menu">
+                                  {% for departments in departments %}
+                                  <li><a href="https://en.wikipedia.org/wiki/Commerce">{{departments.department}}</a></li>
+                                  {% endfor %}
+                              </ul>
+                          </li>
+                          {% if user.is_authenticated %}
+                          <li><a style="color:yellow ;">Hello {{user.username}}</a></li>
+                          <li><a href="{% url 'school:order' %}"><button style="display: inline-block;text-align: center;text-decoration: none;color: #fff;outline: none;background-color: #04AA6D;border: none; border-radius: 15px;padding: 5px 15px;font-size: 16px;font-family:'Poppins', sans-serif;" class="button">To Order</button></a></li>
+                          <li><a href="{% url 'school:logout' %}">Logout</a></li>
+                          {% else %}
+                          <li><a href="{% url 'school:register' %}">Register</a></li>
+                          <li><a href="{% url 'school:login' %}">Login</a></li>
+
+                          {% endif %}
+                      </ul>
+
+                      <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+{% block content %}
+{% endblock %}
+
+<footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2022 Providense Co., Ltd. All Rights Reserved.
+
+          <br>Designed by <a title="CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/swiper.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        var interleaveOffset = 0.5;
+
+      var swiperOptions = {
+        loop: true,
+        speed: 1000,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        mousewheelControl: true,
+        keyboardControl: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        on: {
+          progress: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              var slideProgress = swiper.slides[i].progress;
+              var innerOffset = swiper.width * interleaveOffset;
+              var innerTranslate = slideProgress * innerOffset;
+              swiper.slides[i].querySelector(".slide-inner").style.transform =
+                "translate3d(" + innerTranslate + "px, 0, 0)";
+            }
+          },
+          touchStart: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = "";
+            }
+          },
+          setTransition: function(speed) {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = speed + "ms";
+              swiper.slides[i].querySelector(".slide-inner").style.transition =
+                speed + "ms";
+            }
+          }
+        }
+      };
+
+      var swiper = new Swiper(".swiper-container", swiperOptions);
+    </script>
+  </body>
+</html>
